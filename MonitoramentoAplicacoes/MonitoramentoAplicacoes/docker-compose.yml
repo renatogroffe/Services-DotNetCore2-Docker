@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  monitoramento-aplicacoes:
+    image: monitoramentoaplicacoes
+    build:
+      context: .
+    networks:
+      - monitoramento-network
+    depends_on:
+      - "basemonitoramento"
+
+  basemonitoramento:
+    image: mongo
+    ports:
+      - "57017:27017"
+    networks:
+      - monitoramento-network
+
+networks: 
+    monitoramento-network:
+      driver: bridge
